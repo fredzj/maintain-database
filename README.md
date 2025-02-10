@@ -25,4 +25,4 @@ mysql -u your_username -p your_databasename < /path/to/database/file.sql
 Transfer all files to your server.  
 
 ### 4. Maintain the database
-Schedule `maintainDatabase.php` in order to maintain the database.
+Schedule `maintainDatabase.php` in order to find and repair table corruption, update index statistics, and reduce index and data fragmentation.
