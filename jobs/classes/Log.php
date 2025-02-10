@@ -5,7 +5,7 @@
  * This class provides methods to log messages at different levels (e.g., error, info, debug) and store them in a log file.
  * It includes methods for logging error, info, and debug messages, and a private method to handle the actual logging process.
  * 
- * @package tomorrowio_weatherforecast
+ * @package database-maintenance
  * @version 1.0.0
  * @since 2024
  * @license MIT

@@ -5,7 +5,7 @@
  * This class provides a standard exit routine for scripts. It calculates and displays the total execution time
  * and memory usage when the script terminates.
  * 
- * @package tomorrowio_weatherforecast
+ * @package database-maintenance
  * @version 1.0.0
  * @since 2024
  * @license MIT

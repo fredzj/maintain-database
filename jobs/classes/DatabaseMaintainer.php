@@ -77,17 +77,17 @@ class DatabaseMaintainer {
 		$this->db = new Database($dbConfig);
 	}
 
-/**
- * Perform maintenance tasks on the database.
- *
- * This method retrieves the list of tables and performs the following maintenance tasks:
- * - Repairing table corruption
- * - Updating index statistics
- * - Reducing fragmentation
- *
- * @return void
- */
-public function maintenance(): void {
+	/**
+	 * Perform maintenance tasks on the database.
+	 *
+	 * This method retrieves the list of tables and performs the following maintenance tasks:
+	 * - Repairing table corruption
+	 * - Updating index statistics
+	 * - Reducing fragmentation
+	 *
+	 * @return void
+	 */
+	public function maintenance(): void {
         $this->tables = $this->getTables();
 		$this->repairTableCorruption();
 		$this->updateIndexStatistics();
