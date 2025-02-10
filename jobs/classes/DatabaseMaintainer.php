@@ -2,6 +2,10 @@
 /**
  * Class DatabaseMaintainer
  * 
+ * This class is responsible for performing maintenance tasks on the database.
+ * It connects to the database using a configuration file, retrieves the list
+ * of tables, and performs tasks such as repairing table corruption, updating
+ * index statistics, and reducing fragmentation.
  * 
  * @package DatabaseMaintainer
  * @version 1.0.0
