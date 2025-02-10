@@ -31,34 +31,34 @@
  * @author Fred Onis
  */
 class DatabaseMaintainer {
-    private $db;
-    private $dbConfigPath;
-    private $log;
+	private $db;
+	private $dbConfigPath;
+	private $log;
 	private $tables;
-    private $timeStart;
+	private $timeStart;
 
-    /**
-     * GiataDefinitionsImporter constructor.
-     * 
-     * @param Database $db The database connection object.
-     * @param string $url The URL to fetch JSON data from.
-     */
-    public function __construct($dbConfigPath) {
+	/**
+	 * GiataDefinitionsImporter constructor.
+	 * 
+	 * @param Database $db The database connection object.
+	 * @param string $url The URL to fetch JSON data from.
+	 */
+	public function __construct($dbConfigPath) {
 		$this->dbConfigPath  = $dbConfigPath;
-        $this->log = new Log();
-        $this->registerExitHandler();
+		$this->log = new Log();
+		$this->registerExitHandler();
 		$this->connectDatabase();
-    }
+	}
 
-    /**
-     * Register the exit handler.
-     *
-     * @return void
-     */
-    private function registerExitHandler() {
-        $this->timeStart = microtime(true);
-        register_shutdown_function([new ExitHandler($this->timeStart), 'handleExit']);
-    }
+	/**
+	 * Register the exit handler.
+	 *
+	 * @return void
+	 */
+	private function registerExitHandler() {
+		$this->timeStart = microtime(true);
+		register_shutdown_function([new ExitHandler($this->timeStart), 'handleExit']);
+	}
 
 	/**
 	 * Connects to the database using the configuration file.
@@ -88,11 +88,11 @@ class DatabaseMaintainer {
 	 * @return void
 	 */
 	public function maintenance(): void {
-        $this->tables = $this->getTables();
+		$this->tables = $this->getTables();
 		$this->repairTableCorruption();
 		$this->updateIndexStatistics();
 		$this->reduceFragmentation();
-    }
+	}
 
 	/**
 	* Retrieve the list of tables in the database.
@@ -102,7 +102,7 @@ class DatabaseMaintainer {
 	*
 	* @return array The list of tables.
 	*/
-    private function getTables(): array {
+	private function getTables(): array {
 		$query			=	"
 		SELECT			table_schema, 
 						table_name
@@ -110,7 +110,7 @@ class DatabaseMaintainer {
 		WHERE			table_schema	<>	'information_schema'
 		ORDER BY		1";
 		return	$this->db->select($query);
-    }
+	}
 	
 	/**
 	* Repair table corruption.
