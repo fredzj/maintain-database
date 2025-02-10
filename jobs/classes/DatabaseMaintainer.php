@@ -77,14 +77,32 @@ class DatabaseMaintainer {
 		$this->db = new Database($dbConfig);
 	}
 
-    public function maintenance() {
+/**
+ * Perform maintenance tasks on the database.
+ *
+ * This method retrieves the list of tables and performs the following maintenance tasks:
+ * - Repairing table corruption
+ * - Updating index statistics
+ * - Reducing fragmentation
+ *
+ * @return void
+ */
+public function maintenance(): void {
         $this->tables = $this->getTables();
 		$this->repairTableCorruption();
 		$this->updateIndexStatistics();
 		$this->reduceFragmentation();
     }
 
-    private function getTables() {
+	/**
+	* Retrieve the list of tables in the database.
+	*
+	* This method queries the information_schema.tables to get the list of tables
+	* excluding the 'information_schema' schema.
+	*
+	* @return array The list of tables.
+	*/
+    private function getTables(): array {
 		$query			=	"
 		SELECT			table_schema, 
 						table_name
@@ -94,21 +112,42 @@ class DatabaseMaintainer {
 		return	$this->db->select($query);
     }
 	
-	private function repairTableCorruption() {
+	/**
+	* Repair table corruption.
+	*
+	* This method checks each table for corruption and repairs it if necessary.
+	*
+	* @return void
+	*/
+	private function repairTableCorruption(): void {
 		$this->log->info('Finding and Repairing Table Corruption');
 		foreach ($this->tables as $key => $array) {
 			$this->db->execute('CHECK TABLE ' . $array['table_schema'] . '.' . $array['table_name']);
 		}
 	}
 	
-	private function updateIndexStatistics() {
+	/**
+	* Update index statistics.
+	*
+	* This method updates the index statistics for each table.
+	*
+	* @return void
+	*/
+	private function updateIndexStatistics(): void {
 		$this->log->info('Updating Index Statistics');
 		foreach ($this->tables as $key => $array) {
 			$this->db->execute('ANALYZE TABLE ' . $array['table_schema'] . '.' . $array['table_name']);
 		}
 	}
 	
-	private function reduceFragmentation() {
+	/**
+	* Reduce index and data fragmentation.
+	*
+	* This method optimizes each table to reduce index and data fragmentation.
+	*
+	* @return void
+	*/
+	private function reduceFragmentation(): void {
 		$this->log->info('Reducing Index and Data Fragmentation');
 		foreach ($this->tables as $key => $array) {
 			$this->db->execute('OPTIMIZE TABLE ' . $array['table_schema'] . '.' . $array['table_name']);
