@@ -31,10 +31,10 @@
  * 
  * @author Fred Onis
  */
-require 'classes/Database.php';
-require 'classes/ExitHandler.php';
-require 'classes/Log.php';
-require 'classes/DatabaseMaintainer.php';
+require __DIR__ . '/classes/Database.php';
+require __DIR__ . '/classes/ExitHandler.php';
+require __DIR__ . '/classes/Log.php';
+require __DIR__ . '/classes/DatabaseMaintainer.php';
 
 // Set defaults
 date_default_timezone_set('Europe/Amsterdam');
